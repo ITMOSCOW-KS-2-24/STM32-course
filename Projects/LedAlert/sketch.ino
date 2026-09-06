@@ -18,11 +18,11 @@ void GPIO_Init(void)
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 
-    // Включаем тактирование GPIOA и GPIOB
-
+    // Включаем GPIOA и GPIOB
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
 
+    
     // СВЕТОДИОДЫ
 
     // PB0 и PB1
@@ -41,13 +41,10 @@ void GPIO_Init(void)
     HAL_GPIO_Init( GPIOB, &GPIO_InitStruct);
 
     // КНОПКА
-
     // PA0
     GPIO_InitStruct.Pin = BUTTON_PIN;
-
     // Режим входа
     GPIO_InitStruct.Mode =  GPIO_MODE_INPUT;
-
     // Внутренняя подтяжка к питанию
     GPIO_InitStruct.Pull = GPIO_PULLUP;
 
@@ -59,7 +56,6 @@ void GPIO_Init(void)
     {
         if (HAL_GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN) == GPIO_PIN_RESET)
           {
-
             // Кнопка нажата
 
             // Выключаем зелёный
@@ -83,11 +79,7 @@ void GPIO_Init(void)
             // Возвращаем нормальный режим
 
             // Красный выключаем
-            HAL_GPIO_WritePin(
-                RED_LED_PORT, RED_LED_PIN, GPIO_PIN_RESET
-            );
-
-
+            HAL_GPIO_WritePin( RED_LED_PORT, RED_LED_PIN, GPIO_PIN_RESET );
             // Зелёный включаем
             HAL_GPIO_WritePin( GREEN_LED_PORT, GREEN_LED_PIN, GPIO_PIN_SET );
 
